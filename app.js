@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const stuffRoutes = require('./routes/stuff');
 const userRoutes = require('./routes/user');
+const path = require('path');
 
 // Connect to Mongo
 mongoose.connect('mongodb+srv://test:1234@cluster0.483bg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
@@ -23,7 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/stuff', stuffRoutes);
 app.use('/api/auth', userRoutes);
 
